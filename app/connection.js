@@ -13,4 +13,9 @@ export const connect = Knex({
     }
 })
 
-
+//check error connection knex
+connect.raw('select 1+1 as result').catch(err => {
+    console.log(err);
+    process.exit(1);
+});
+  
