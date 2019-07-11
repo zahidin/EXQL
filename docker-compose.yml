@@ -10,7 +10,7 @@ services:
                   - exql-network
   express-graphql:
           container_name: express-graphql
-          images: express-graphql
+          images: express-graphql:1.0
           ports:
                   - 1212:1212
           depends_on:
