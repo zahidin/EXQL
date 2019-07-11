@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-	db:
+	postgres:
 		container_name: postgresql
 		image: postgres
 		environment:
@@ -15,11 +15,11 @@ services:
 		networks:
 			- exql-network
 
-	api:
+	express-graphql:
 		container_name: express-graphql
 		image: express-graphql:1.0
 		depends_on:
-			- db
+			- postgres
 		environment:
 		  KNEX_CLIENT: pg
 			DB_NAME: boilerplate
