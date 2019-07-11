@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
 	db:
-		image:	postgres
+		image: postgres
 		environment:
 			POSTGRES_PASSWORD: 123456
 			POSTGRES_USER: postgres
@@ -13,9 +13,9 @@ services:
 			- "5432:5432"
 		networks:
 			- exql-network
-			
+
 	api:
-		images: express-graphql:1.0
+		image: express-graphql:1.0
 		depends_on:
 			- db
 		environment:
