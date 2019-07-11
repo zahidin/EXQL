@@ -3,19 +3,19 @@ version: "3.7"
 services:
   postgres:
           container_name: postgresql
-          images: postgres:latest
+          image: postgres:latest
           ports:
                   - 5432:5432
           networks:
                   - exql-network
   express-graphql:
           container_name: express-graphql
-          images: express-graphql:1.0
+          image: express-graphql:1.0
           ports:
                   - 1212:1212
           depends_on:
                   - postgres
-          enviroment:
+          environment:
                   - KNEX_CLIENT=pg
                   - DB_NAME=boilerplate
                   - DB_PASSWORD=
