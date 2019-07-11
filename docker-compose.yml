@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
 	db:
+		container_name: postgresql
 		image: postgres
 		environment:
 			POSTGRES_PASSWORD: 123456
@@ -15,6 +16,7 @@ services:
 			- exql-network
 
 	api:
+		container_name: express-graphql
 		image: express-graphql:1.0
 		depends_on:
 			- db
