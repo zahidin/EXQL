@@ -2,8 +2,8 @@ version: "3.7"
 
 services:
   postgres:
-		container_name: postgresql
 		image: postgres:latest
+		container_name: postgresql
 		environment:
 			POSTGRES_PASSWORD: postgres
 			POSTGRES_USER: postgres
@@ -16,8 +16,8 @@ services:
 			- exql-network
 
   express-graphql:
-		container_name: express-graphql
 		image: express-graphql:1.0
+		container_name: express-graphql
 		ports:
 			- "1212:1212"
 		depends_on:
