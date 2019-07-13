@@ -1,38 +1,17 @@
 version: "3.7"
-
 services:
-  postgres:
-		image: postgres:latest
-		name: postgresql
-		environment:
-			POSTGRES_PASSWORD: postgres
-			POSTGRES_USER: postgres
-			POSTGRES_DB: boilerplate
-		volumes:
-			- ./pgdata:/var/lib/postgresql/data
-		ports:
-			- "5432:5432"   
-		networks:
-			- exql-network
 
-  express-graphql:
-		image: express-graphql:1.0
-		name: express-graphql
-		ports:
-			- "1212:1212"
-		depends_on:
-			- postgres
-		environment:
-			- KNEX_CLIENT=pg
-			- DB_NAME=boilerplate
-			- DB_USERNAME=postgres
-			- DB_PASSWORD=postgres
-			- DB_PORT=5432
-			- PORT=1212
-			- HOST=postgresql
-		networks:
-			- exql-network
+        db:
+         image: "postgres:latest"
+         container_name: "postgressql"
+         environment:
+          POSTGRES_PASSWORD: "db_postgres"
+          POSTGRES_USER: "postgres"
+         ports:
+          - "5432:5432"
+         volumes:
+          - db_postgres:/var/lib/postgresql/data
 
-networks:
-  exql-network:
-		name: exql-network
+volumes:
+        db_postgres:
+
