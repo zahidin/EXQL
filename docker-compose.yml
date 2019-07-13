@@ -30,7 +30,10 @@ services:
           - "1212:1212"
          networks: 
           - exql-network 
-
+        adminer:
+          image: "adminer"
+          ports: 
+           - "1313:1313"
 networks: 
  exql-network:
   name: exql-network
