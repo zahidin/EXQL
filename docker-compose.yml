@@ -32,6 +32,8 @@ services:
           - exql-network 
         adminer:
           image: "adminer"
+          networks: 
+            - exql-network 
           ports: 
            - "1313:1313"
 networks: 
