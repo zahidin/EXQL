@@ -20,12 +20,12 @@ services:
          depends_on: 
           - db
          environment: 
-          - KNEX_CLIENT:pg
-          - DB_NAME:boilerplate
-          - DB_PASWWORD:db_postgres
-          - DB_PORT:5432
-          - PORT:1212
-          - HOST:postgressql
+          - KNEX_CLIENT=pg
+          - DB_NAME=boilerplate
+          - DB_PASWWORD=db_postgres
+          - DB_PORT=5432
+          - PORT=1212
+          - HOST=postgressql
          ports: 
           - "1212:1212"
          networks: 
