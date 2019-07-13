@@ -21,7 +21,8 @@ services:
          environment: 
           - KNEX_CLIENT=pg
           - DB_NAME=boilerplate
-          - DB_PASWWORD=db_postgres
+          - DB_USERNAME=postgres   
+          - DB_PASSWORD=db_postgres   
           - DB_PORT=5432
           - PORT=1212
           - HOST=postgressql
