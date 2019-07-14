@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
         db:
-         image: "postgres:latest"
+         image: postgres
          container_name: "postgressql"
          environment:
           POSTGRES_PASSWORD: postgrespassword
@@ -11,7 +11,7 @@ services:
          ports:
           - "5432:5432"
          volumes:
-          - pgdata:/var/lib/postgresql/data
+          - ./pgdata:/var/lib/postgresql/data
          networks: 
           - exql-network
           
@@ -27,12 +27,12 @@ services:
           - DB_PASSWORD=postgrespassword   
           - DB_PORT=5432
           - PORT=1212
-          - HOST=postgressql
+          - HOST=db
          ports: 
           - "1212:1212"
          networks: 
           - exql-network 
-          
+
 networks: 
  exql-network:
   name: exql-network
