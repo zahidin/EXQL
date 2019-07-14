@@ -6,6 +6,7 @@ services:
          container_name: "postgressql"
          environment:
           POSTGRES_PASSWORD: postgrespassword
+          POSTGRES_USER: root
          ports:
           - "5432:5432"
          volumes:
@@ -21,7 +22,7 @@ services:
          environment: 
           - KNEX_CLIENT=pg
           - DB_NAME=boilerplate
-          - DB_USERNAME=postgres   
+          - DB_USERNAME=root   
           - DB_PASSWORD=postgrespassword   
           - DB_PORT=5432
           - PORT=1212
