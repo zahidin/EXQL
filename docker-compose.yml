@@ -5,7 +5,7 @@ services:
          image: "postgres:latest"
          container_name: "postgressql"
          environment:
-          POSTGRES_PASSWORD: "db_postgres"
+          POSTGRES_PASSWORD: postgrespassword
          ports:
           - "5432:5432"
          volumes:
@@ -22,7 +22,7 @@ services:
           - KNEX_CLIENT=pg
           - DB_NAME=boilerplate
           - DB_USERNAME=postgres   
-          - DB_PASSWORD=db_postgres   
+          - DB_PASSWORD=postgrespassword   
           - DB_PORT=5432
           - PORT=1212
           - HOST=postgressql
