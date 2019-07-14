@@ -1,35 +1,35 @@
 version: "3.7"
 services:
 
-        db:
+        postgressql:
          image: postgres
-         container_name: "postgressql"
+         container_name: postgressql
          environment:
           POSTGRES_PASSWORD: postgrespassword
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_DB: boilerplate
          ports:
-          - "5432:5432"
+          - 5432:5432
          volumes:
           - ./pgdata:/var/lib/postgresql/data
          networks: 
           - exql-network
           
-        app:
-         image: "exql:1.0"
-         container_name: "express-graphql"
+        express-graphql:
+         image: exql:1.0
+         container_name: express-graphql
          depends_on: 
-          - db
+          - postgressql
          environment: 
           - KNEX_CLIENT=pg
           - DB_NAME=boilerplate
-          - DB_USERNAME=root   
+          - DB_USERNAME=postgres   
           - DB_PASSWORD=postgrespassword   
           - DB_PORT=5432
           - PORT=1212
-          - HOST=db
+          - HOST=postgressql
          ports: 
-          - "1212:1212"
+          - 1212:1212
          networks: 
           - exql-network 
 
