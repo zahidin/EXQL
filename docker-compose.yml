@@ -16,7 +16,9 @@ services:
           - exql-network
 
         express-graphql:
-         image: exql:1.0
+         build:
+          context: .
+          dockerfile: Dockerfile
          container_name: express-graphql
          depends_on:
           - postgressql
