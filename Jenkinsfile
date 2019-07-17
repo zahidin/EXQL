@@ -25,8 +25,13 @@ pipeline{
         }
         stage('Run Dockercompose File'){
             steps{
-                sh 'docker-compose up'
+                sh 'docker-compose up -d'
             }
         }    
+        stage('Import Database'){
+            steps{
+                sh 'docker exec -i postgressql  psql -U postgres boilerplate < boilerplate.sql;'
+            }
+        }
     }
 }
