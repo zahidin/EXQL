@@ -8,11 +8,6 @@ pipeline{
         //         env.PATH = "${dockerHome}/bin:${env.PATH}"
         //     }
         // }
-        stage('Checkout'){
-            steps{
-                git credentialsId: 'git-credential', url: 'https://github.com/zahidin/EXQL'
-            }
-        }
         stage('Node Package'){
             steps{
                 sh 'npm install'
