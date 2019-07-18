@@ -54,10 +54,15 @@ pipeline{
                 sh 'docker exec -i postgressql  psql -U root boilerplate < boilerplate.sql;'
             }
         }
-        stage('Notification Telegram Build'){
-            steps{
-                sh 'curl -s -X POST https://api.telegram.org/bot943240799:AAE-SwViyG2DgHPWO6g6luxh_09YhrD33hg/sendMessage -d chat_id=333691530 -d text="Mangap Mas"'
-            }
+    }
+    post {
+        failure {
+            sh 'docker-compose down'
+            sh 'docker-compose up -d'
+            telegramSend "❌ *BUILD FAILED* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n" + getChangeString() 
+        }
+        success {
+            telegramSend "✅ *BUILD SUCCESS* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n" + getChangeString()
         }
     }
 }
