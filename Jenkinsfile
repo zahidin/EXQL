@@ -38,7 +38,7 @@ pipeline{
         // }
         stage('Send Notification Before Build') {
             steps {
-                sh "curl -s -X POST https://api.telegram.org/bot${TOKEN_BOT_TELE}/sendMessage -d chat_id=-${CHAT_ID_TELE} -d text='✴️ <b>BUILD RUNNING</b> \n\nProject: ${env.JOB_NAME} '"
+                sh "curl -s -X POST https://api.telegram.org/bot${TOKEN_BOT_TELE}/sendMessage -d chat_id=-${CHAT_ID_TELE} -d text='✴️ *BUILD RUNNING* \n\nProject: ${env.JOB_NAME} '&parse_mode=markdown"
             }
         }
         stage('Node Package'){
@@ -66,10 +66,10 @@ pipeline{
         failure {
             sh 'docker-compose down'
             sh 'docker-compose up -d'
-            sh "curl -s -X POST https://api.telegram.org/bot${TOKEN_BOT_TELE}/sendMessage -d chat_id=-${CHAT_ID_TELE} -d text='❌ **BUILD FAILED** \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n"+ getChangeString() + "'"
+            sh "curl -s -X POST https://api.telegram.org/bot${TOKEN_BOT_TELE}/sendMessage -d chat_id=-${CHAT_ID_TELE} -d text='❌ *BUILD FAILED* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n"+ getChangeString() + "'&parse_mode=markdown"
         }
         success {
-            sh "curl -s -X POST https://api.telegram.org/bot${TOKEN_BOT_TELE}/sendMessage -d chat_id=-${CHAT_ID_TELE} -d text='✅ **BUILD SUCCESS** \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n"+ getChangeString() + "'"
+            sh "curl -s -X POST https://api.telegram.org/bot${TOKEN_BOT_TELE}/sendMessage -d chat_id=-${CHAT_ID_TELE} -d text='✅ *BUILD SUCCESS* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n"+ getChangeString() + "'&parse_mode=markdown"
         }
     }
 }
