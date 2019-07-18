@@ -22,6 +22,7 @@ def getChangeString() {
     }
 
     return changeString
+    
 }
 
 pipeline{
@@ -39,6 +40,11 @@ pipeline{
                 sh 'npm install'
             }
         }
+        stage('Telegram Notification Build'){
+            steps{
+                sh 'curl -s -X POST https://api.telegram.org/bot930385962:AAF_QTdZi-U2YzrkMaVMtbtkTiJB1SadnaY/sendMessage -d chat_id=-333691530 -d text="✅ *BUILD SUCCESS* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n"' + getChangeString() + '"'
+            }
+        }
         stage('Clear Dockercompose'){
             steps{
                 sh 'docker-compose down'
@@ -53,16 +59,6 @@ pipeline{
             steps{
                 sh 'docker exec -i postgressql  psql -U root boilerplate < boilerplate.sql;'
             }
-        }
-    }
-    post {
-        failure {
-            sh 'docker-compose down'
-            sh 'docker-compose up -d'
-            telegramSend "❌ *BUILD FAILED* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n" + getChangeString() 
-        }
-        success {
-            telegramSend "✅ *BUILD SUCCESS* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n" + getChangeString()
         }
     }
 }
