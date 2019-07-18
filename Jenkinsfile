@@ -42,7 +42,7 @@ pipeline{
         }
         stage('Telegram Notification Build'){
             steps{
-                sh 'curl -s -X POST https://api.telegram.org/bot930385962:AAF_QTdZi-U2YzrkMaVMtbtkTiJB1SadnaY/sendMessage -d chat_id=-333691530 -d text="✅ *BUILD SUCCESS* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n"' + getChangeString() + '"'
+                sh "curl -s -X POST https://api.telegram.org/bot930385962:AAF_QTdZi-U2YzrkMaVMtbtkTiJB1SadnaY/sendMessage -d chat_id=-333691530 -d text='✅ *BUILD SUCCESS* \n\nProject: ${env.JOB_NAME} \nDate of build: ${date} \nBuild duration: ${currentBuild.durationString} \n\nCHANGES \n"+ getChangeString() + "'"
             }
         }
         stage('Clear Dockercompose'){
