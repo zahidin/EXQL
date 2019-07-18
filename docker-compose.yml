@@ -24,6 +24,7 @@ services:
          depends_on:
           - postgressql
          environment:
+          - APP_NAME=EXQL
           - KNEX_CLIENT=pg
           - DB_NAME=boilerplate
           - DB_USERNAME=root
